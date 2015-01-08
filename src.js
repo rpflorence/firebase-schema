@@ -88,7 +88,7 @@ var createRefForReals = (Firebase, path, routes, host) => {
   };
   var push = (obj, cb) => {
     validatePush(obj, path, routes, matchInfo);
-    firebaseRef.push(obj, cb);
+    return firebaseRef.push(obj, cb).key();
   };
   var parse = (snapshot, cb) => {
     var snapshotVal = snapshot.val();
