@@ -86,6 +86,12 @@ var createRefForReals = (Firebase, path, routes, host) => {
       validateHash(val, path, routes, matchInfo);
     firebaseRef.set(val, cb);
   };
+  var update = (val, cb) => {
+    handler.validate(val, path);
+    if (handler === hash)
+      validateHash(val, path, routes, matchInfo);
+    firebaseRef.update(val, cb);
+  };
   var push = (obj, cb) => {
     validatePush(obj, path, routes, matchInfo);
     firebaseRef.push(obj, cb);
@@ -124,7 +130,7 @@ var createRefForReals = (Firebase, path, routes, host) => {
   };
   var removeChangeListener = () => {
   };
-  return { set:set, getValue, push, child, listen };
+  return { set:set, update, getValue, push, child, listen };
 };
 
 var transformHash = (child, routes, path) => {
